@@ -19,6 +19,7 @@ function App(){
         setAnimals([...animals, getRandomAnimal()]);
      };
 
+     //map() function iterates and send each element in the array to the function
      const renderAnimals = animals.map((animal, index) => {
         return <AnimalShow type={animal} key={index}/>
      });
