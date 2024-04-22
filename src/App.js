@@ -1,56 +1,34 @@
+import'./App.css';
 import { useState } from "react";
+import AnimalShow from './AnimalShow'
 
-function useState(defaultValue){
-    return {
-        yourState: defaultValue,
-        yourSetter: () => {}
-    };
+function getRandomAnimal(){
+    const animals = ['bird', 'cat', 'cow', 'dog', 'gator', 'horse'];
+
+    return animals[(Math.floor(Math.random() * animals.length))];
 }
+
+console.log(getRandomAnimal());
+
 
 function App(){
 
-//////////////////////////////////////////////
-    // function makeArray() {
-    //     return [1, 10, 32, 40];
-    // }
+    const[animals, setAnimals] = useState([]);
 
-    // const myArray = makeArray();
-    // const firstElement = myArray[0];
-    // const secondElement = myArray[2];
-    // console.log(firstElement, secondElement);
+     const handleClick = () => {
+        setAnimals([...animals, getRandomAnimal()]);
+     };
 
-    // //Array destructuring
-    // const [firstEle, secondEle] = makeArray();
-    // console.log(firstElement, secondElement);
+     const renderAnimals = animals.map((animal, index) => {
+        return <AnimalShow type={animal} key={index}/>
+     });
 
- ////////////////////////////////////////////////   
-    //const handleMouseMove = () => {
-    //    console.log('Button was clicked!');
-    //}
-
-    //const handleClick = () => {
-    //    console.log('Button was clicked!');
-    //}
-
-/////////////////////////////////////////////////
-
-
-const{ yourSetter} = useState(0);
-
-
-/////////////////////////////////////////////////
-    //const [count, setCount] = useState(0);
-    // const handleClick = () => {
-    //     setCount(count + 1);
-    // };
-
-    // return (
-    //     <div>
-    //         <button onClick={handleClick}>Add Animal Click</button>
-    //         <div>Number of Animals : {count}</div>
-    //        {/*<button onMouseMove={handleMouseMove}>Add Animal Move</button>*/}
-    //     </div>
-    // );
+     return (
+         <div className="app">
+            <button onClick={handleClick}>Add Animal Click</button>
+            <div className='animal-list'>{renderAnimals}</div>
+         </div>
+     );
 }
 
 export default App;
